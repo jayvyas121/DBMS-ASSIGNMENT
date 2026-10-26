@@ -1,0 +1,83 @@
+1. Number of jobs available in the employees table
+SELECT COUNT(DISTINCT job_id)
+FROM employees;
+
+
+2. Total salaries payable to employees
+SELECT SUM(salary)
+FROM employees;
+
+
+3. Minimum salary from the employees table
+SELECT MIN(salary)
+FROM employees;
+
+
+4. Maximum salary of an employee working as a Programmer
+SELECT MAX(salary)
+FROM employees
+WHERE job_id = 'IT_PROG';
+
+
+5. Average salary and number of employees in department 90
+SELECT AVG(salary), COUNT(*)
+FROM employees
+WHERE department_id = 90;
+
+
+6. Highest, lowest, sum, and average salary of all employees
+SELECT MAX(salary), MIN(salary),
+       SUM(salary), AVG(salary)
+FROM employees;
+
+
+7. Number of employees with the same job
+SELECT job_id, COUNT(*)
+FROM employees
+GROUP BY job_id;
+
+
+8. Difference between the highest and lowest salaries
+SELECT MAX(salary) - MIN(salary) AS salary_difference
+FROM employees;
+
+
+9. Manager ID and salary of the lowest-paid employee for each manager
+SELECT manager_id, MIN(salary)
+FROM employees
+GROUP BY manager_id;
+
+
+10. Department ID and total salary payable in each department
+SELECT department_id, SUM(salary)
+FROM employees
+GROUP BY department_id;
+
+
+11. Average salary for each job ID, excluding Programmer
+SELECT job_id, AVG(salary)
+FROM employees
+WHERE job_id <> 'IT_PROG'
+GROUP BY job_id;
+
+
+12. Total, maximum, minimum, and average salary by job ID for department 90
+SELECT job_id, SUM(salary), MAX(salary),
+       MIN(salary), AVG(salary)
+FROM employees
+WHERE department_id = 90
+GROUP BY job_id;
+
+
+13. Job ID and maximum salary where the maximum salary is at least 4000
+SELECT job_id, MAX(salary)
+FROM employees
+GROUP BY job_id
+HAVING MAX(salary) >= 4000;
+
+
+14. Average salary for departments employing more than 10 employees
+SELECT department_id, AVG(salary)
+FROM employees
+GROUP BY department_id
+HAVING COUNT(*) > 10;
